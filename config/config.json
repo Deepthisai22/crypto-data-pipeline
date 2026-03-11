@@ -1,0 +1,6 @@
+{
+  "api_url": "https://api.coingecko.com/api/v3/simple/price",
+  "coins": "bitcoin,ethereum,solana",
+  "currency": "usd",
+  "output_file": "output/crypto_prices.csv"
+}
