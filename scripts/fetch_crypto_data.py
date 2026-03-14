@@ -21,11 +21,8 @@ try:
     coins = config["coins"]
     currency = config["currency"]
 
-    # Build API URL
     url = f"{api_url}?ids={coins}&vs_currencies={currency}"
 
-
-    # API Request
     response = requests.get(url)
 
     if response.status_code != 200:
@@ -37,25 +34,18 @@ try:
     data = response.json()
 
     
-    # Convert JSON → DataFrame
     df = pd.DataFrame(data).T
     df.columns = ["price_usd"]
 
-    # Add timestamp column
     df["timestamp"] = datetime.now()
 
-    # Reset index so coin becomes column
     df.reset_index(inplace=True)
     df.rename(columns={"index": "coin"}, inplace=True)
 
-    # -------------------------------
-    # Missing Data Handling
-    # -------------------------------
+
     df.dropna(subset=["price_usd"], inplace=True)
 
-    # -------------------------------
-    # Save to CSV
-    # -------------------------------
+
     df.to_csv(
         "output/crypto_prices.csv",
         mode="a",
@@ -65,9 +55,6 @@ try:
 
     logging.info("Data saved to CSV")
 
-    # -------------------------------
-    # Store in PostgreSQL
-    # -------------------------------
     conn = psycopg2.connect(
         host="localhost",
         database="crypto_pipeline",
