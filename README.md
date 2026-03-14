@@ -13,14 +13,13 @@ Data Cleaning (Pandas)
       ↓
 PostgreSQL Database
       ↓
-Logging + Scheduler
+Logging 
 
 ## Tools Used
 - Python
 - Pandas
 - Requests
 - PostgreSQL
-- Windows Task Scheduler
 - Logging
 
 ## Pipeline Steps
@@ -29,4 +28,3 @@ Logging + Scheduler
 3. Clean and structure the data
 4. Store processed data in PostgreSQL
 5. Log pipeline execution
-6. Automatically run pipeline using Windows Task Scheduler
