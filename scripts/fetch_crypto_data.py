@@ -5,9 +5,6 @@ import logging
 import psycopg2
 import json
 
-# -------------------------------
-# Logging Setup
-# -------------------------------
 logging.basicConfig(
     filename="pipeline.log",
     level=logging.INFO,
@@ -17,10 +14,6 @@ logging.basicConfig(
 logging.info("Pipeline started")
 
 try:
-
-    # -------------------------------
-    # Load configuration
-    # -------------------------------
     with open("config/config.json") as f:
         config = json.load(f)
 
@@ -31,9 +24,8 @@ try:
     # Build API URL
     url = f"{api_url}?ids={coins}&vs_currencies={currency}"
 
-    # -------------------------------
+
     # API Request
-    # -------------------------------
     response = requests.get(url)
 
     if response.status_code != 200:
@@ -44,9 +36,8 @@ try:
 
     data = response.json()
 
-    # -------------------------------
+    
     # Convert JSON → DataFrame
-    # -------------------------------
     df = pd.DataFrame(data).T
     df.columns = ["price_usd"]
 
